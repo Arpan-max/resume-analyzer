@@ -20,8 +20,6 @@ Animated Score Ring — SVG-based animated circular progress
 
 Resume Profile Extraction — Name, email, skills, companies, education
 
-Rate Limiting — 10 requests per 15 minutes to protect API quota
-
 File Validation — Type checking, size limits, content verification
 
 🛠️ Local Setup Instructions
