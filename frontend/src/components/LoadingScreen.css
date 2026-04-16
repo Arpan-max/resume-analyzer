@@ -1,0 +1,165 @@
+.loading-screen {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 70vh;
+  animation: fadeUp 0.4s ease;
+}
+
+.loading-inner {
+  text-align: center;
+  max-width: 480px;
+  width: 100%;
+}
+
+/* Spinner */
+.loading-spinner {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 36px;
+}
+
+.spinner-ring {
+  position: absolute;
+  inset: 0;
+  border: 2px solid transparent;
+  border-top-color: var(--accent-primary);
+  border-radius: 50%;
+  animation: spin 1.2s linear infinite;
+}
+
+.spinner-ring-2 {
+  inset: 8px;
+  border-top-color: var(--accent-secondary);
+  animation-duration: 1.8s;
+  animation-direction: reverse;
+}
+
+.spinner-dot {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 10px;
+  height: 10px;
+  background: var(--accent-primary);
+  border-radius: 50%;
+  animation: pulse-glow 1.5s infinite;
+}
+
+.loading-title {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+  margin-bottom: 8px;
+}
+
+.loading-subtitle {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-bottom: 36px;
+}
+
+/* Steps */
+.steps-list {
+  text-align: left;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 8px;
+  margin-bottom: 28px;
+}
+
+.step-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  transition: all 0.3s;
+}
+
+.step-item.active {
+  background: rgba(124, 106, 247, 0.08);
+}
+
+.step-indicator {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.step-item.done .step-indicator {
+  background: rgba(76, 175, 130, 0.15);
+  color: var(--accent-success);
+}
+
+.step-item.active .step-indicator {
+  background: rgba(124, 106, 247, 0.15);
+}
+
+.step-item.pending .step-indicator {
+  background: rgba(255,255,255,0.03);
+}
+
+.step-pulse {
+  width: 8px;
+  height: 8px;
+  background: var(--accent-primary);
+  border-radius: 50%;
+  animation: pulse-glow 1s infinite;
+}
+
+.step-empty {
+  width: 6px;
+  height: 6px;
+  background: var(--text-muted);
+  border-radius: 50%;
+  opacity: 0.3;
+}
+
+.step-icon {
+  font-size: 0.9rem;
+}
+
+.step-label {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  transition: color 0.3s;
+}
+
+.step-item.active .step-label {
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.step-item.done .step-label {
+  color: var(--accent-success);
+}
+
+.step-item.pending .step-label {
+  color: var(--text-muted);
+}
+
+/* Timer */
+.loading-timer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--text-muted);
+}
+
+.timer-value {
+  color: var(--accent-primary);
+  font-weight: 500;
+}
