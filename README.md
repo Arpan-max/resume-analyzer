@@ -1,38 +1,30 @@
-ResumeAI — AI-Powered Resume Analyzer & ATS ScorerA full-stack web application that allows users to upload their resumes and compare them against specific job descriptions. Utilizing Claude AI (Anthropic), the tool employs prompt chains to extract skills, calculate an ATS compatibility score, identify keyword gaps, and generate tailored, section-by-section improvement suggestions.🚀 Tech StackFrontend: React.js, Tailwind CSS (or standard CSS, update as needed)Backend: Node.js, Express.jsAI Processing: Claude API (Anthropic SDK)File Parsing: Multer, pdf-parse, mammoth✨ FeaturesDrag & Drop Upload: Support for PDF, DOCX, and TXT resume uploads.ATS Scoring System: Calculates an overall score alongside 4 sub-scores (Keywords, Format, Experience, Education).Keyword Gap Analysis: Visual tagging of matched versus missing keywords based on the target job description.3-Step AI Prompt Chain: Sequential Claude API calls (Parse → Score → Suggest) for accurate and structured JSON outputs.Section-wise Feedback: Detailed, AI-generated suggestions for Summary, Skills, Experience, Formatting, and Keywords.Animated Score Ring: Custom SVG-based animated circular progress indicators for visual feedback.Resume Profile Extraction: Automatically parses Name, Email, Skills, Companies, and Education history.Robust Backend: Includes rate limiting (10 requests/15 mins) and comprehensive file validation (type checking, size limits, content verification).🛠️ Getting StartedPrerequisitesNode.js (v18 or higher)An Anthropic API Key (Claude)InstallationClone the repository:git clone [https://github.com/Arpan-max/resume-analyzer.git](https://github.com/Arpan-max/resume-analyzer.git)
+<div align="center">📄 ResumeAIAI-Powered Resume Analyzer & ATS ScorerUpload your resume, paste a job description, and let Claude AI reveal your ATS score, keyword gaps, and tailored improvements.</div>✨ Key Features🎯 ATS Scoring System: Get an overall score plus breakdown metrics (Keywords, Format, Experience, Education).🔍 Keyword Gap Analysis: Instantly see which crucial keywords from the JD are missing in your resume.🧠 3-Step AI Prompt Chain: Uses advanced sequence processing (Parse → Score → Suggest) for reliable JSON outputs.📝 Section-wise Feedback: Highly tailored advice for your Summary, Skills, Experience, and Formatting.⚙️ Deep Resume Parsing: Accurately extracts Name, Email, Skills, and Work History from PDF, DOCX, and TXT files.🎨 Interactive UI: Features drag-and-drop uploads and custom SVG animated score rings.🚀 Getting StartedFollow these steps to set up the project locally.PrerequisitesMake sure you have installed:Node.js (v18+)Anthropic API KeyInstallation1. Clone the repositorygit clone [https://github.com/Arpan-max/resume-analyzer.git](https://github.com/Arpan-max/resume-analyzer.git)
 cd resume-analyzer
-Set up the Backend:cd backend
+2. Setup Backendcd backend
 npm install
-Configure Environment Variables:Create a .env file in the backend directory:ANTHROPIC_API_KEY=your_anthropic_api_key_here
+Create a .env file in the backend folder:ANTHROPIC_API_KEY=your_anthropic_api_key_here
 PORT=5000
 FRONTEND_URL=http://localhost:3000
-Set up the Frontend:Open a new terminal window/tab:cd frontend
+3. Setup FrontendOpen a new terminal tab:cd frontend
 npm install
-Running the ApplicationYou will need to run the frontend and backend concurrently.Start the Backend (Terminal 1):cd backend
+Running the AppRun both servers concurrently to start the application.Terminal 1 (Backend):cd backend
 npm run dev
-Start the Frontend (Terminal 2):cd frontend
+Terminal 2 (Frontend):cd frontend
 npm start
-The application will be available at http://localhost:3000.📁 Project Structureresume-analyzer/
+Success: Open http://localhost:3000 in your browser.📂 Project Architecture<details><summary>Click to expand folder structure</summary>resume-analyzer/
 ├── backend/
 │   ├── routes/
-│   │   └── analyze.js          # File upload & analysis endpoint
+│   │   └── analyze.js          # File upload & analysis logic
 │   ├── utils/
-│   │   ├── fileParser.js       # PDF/DOCX/TXT text extraction
-│   │   └── aiAnalyzer.js       # 3-step Claude AI prompt chain
-│   ├── server.js               # Express server entry point
-│   └── package.json
-├── frontend/
-│   ├── public/
-│   ├── src/
-│   │   ├── components/
-│   │   │   ├── Header.js             # Navigation header
-│   │   │   ├── UploadSection.js      # Drag-drop upload + JD input
-│   │   │   ├── LoadingScreen.js      # Animated loading with step tracking
-│   │   │   ├── ResultsDashboard.js   # Main results view
-│   │   │   ├── ScoreRing.js          # Animated SVG score ring
-│   │   │   ├── KeywordSection.js     # Matched/missing keywords
-│   │   │   ├── SuggestionsPanel.js   # Section-wise AI suggestions
-│   │   │   └── ResumeInfo.js         # Extracted resume profile
-│   │   ├── App.js
-│   │   └── index.js
-│   └── package.json
-└── README.md
+│   │   ├── fileParser.js       # Extracts text from docs
+│   │   └── aiAnalyzer.js       # Claude API prompt chains
+│   └── server.js               # Express entry point
+└── frontend/
+    └── src/
+        ├── components/
+        │   ├── UploadSection.js      
+        │   ├── ResultsDashboard.js   
+        │   ├── ScoreRing.js          
+        │   └── SuggestionsPanel.js   
+        └── App.js
+</details><div align="center"><i>Built by Arpan</i></div>
