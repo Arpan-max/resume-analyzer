@@ -1,128 +1,163 @@
-ResumeAI — AI-Powered Resume Analyzer & ATS Scorer
+# ResumeAI — AI-Powered Resume Analyzer & ATS Scorer
 
-A full-stack tool where users upload a resume and job description; Claude AI-powered prompt chains extract skills, score ATS compatibility, identify keyword gaps, and generate tailored improvement suggestions.
+> Upload your resume, paste a job description, and get instant ATS scoring, keyword gap analysis, and tailored improvement suggestions — powered by Claude AI.
 
-Tech Stack: React.js · Node.js · Express · Claude AI (Anthropic) · Multer · pdf-parse · mammoth
+![Tech Stack](https://img.shields.io/badge/React-18-61DAFB?style=flat-square&logo=react)
+![Node](https://img.shields.io/badge/Node.js-18+-339933?style=flat-square&logo=node.js)
+![Express](https://img.shields.io/badge/Express-4-000000?style=flat-square&logo=express)
+![Claude AI](https://img.shields.io/badge/Claude_AI-Anthropic-CC785C?style=flat-square)
 
-💡 Features Summary
+---
 
-Drag & Drop Upload — PDF, DOCX, TXT resume upload
+## ✨ Features
 
-ATS Scoring — Overall score + 4 sub-scores (keyword, format, experience, education)
+- **Drag & Drop Upload** — Supports PDF, DOCX, and TXT resume formats
+- **ATS Compatibility Score** — Overall score + 4 sub-scores (keyword match, format, experience, education)
+- **Keyword Gap Analysis** — Visual breakdown of matched vs. missing keywords from the job description
+- **3-Step AI Prompt Chain** — Sequential Claude API calls: Parse → Score → Suggest
+- **Section-wise Feedback** — Targeted suggestions for Summary, Skills, Experience, Format, and Keywords
+- **Animated Score Ring** — SVG-based circular progress indicator with real-time animation
+- **Resume Profile Extraction** — Extracts name, skills, companies, education, and job titles
+- **Rate Limiting** — Built-in API protection (10 requests per 15 minutes)
 
-Keyword Gap Analysis — Matched vs missing keywords with visual tags
+---
 
-3-Step AI Prompt Chain — Parse → Score → Suggest (sequential Claude API calls)
+## 🖥️ Demo
 
-Section-wise Feedback — Summary, Skills, Experience, Format, Keywords
+| Upload Screen | Results Dashboard |
+|---|---|
+| Drag & drop resume + paste job description | ATS score, keyword gaps, and AI suggestions |
 
-Animated Score Ring — SVG-based animated circular progress
+---
 
-Resume Profile Extraction — Name, email, skills, companies, education
+## 🛠️ Tech Stack
 
-File Validation — Type checking, size limits, content verification
+| Layer | Technology |
+|---|---|
+| Frontend | React 18, React Dropzone, CSS Variables |
+| Backend | Node.js, Express.js |
+| File Parsing | Multer, pdf-parse, mammoth |
+| AI / LLM | Anthropic Claude API (claude-haiku) |
+| Deployment | Vercel (frontend) + Render (backend) |
 
-🛠️ Local Setup Instructions
+---
 
-1 — Prerequisites
+## ⚙️ How It Works
 
-Node.js (v18 or higher)
+The backend runs a **3-step prompt chain** against the Claude API:
 
-Anthropic API Key (Claude AI)
+```
+Step 1 — Resume Parser
+  └─ Extracts: name, skills, experience years, education, job titles, companies
 
-2 — Clone the Repository
+Step 2 — ATS Scorer
+  └─ Compares resume against job description keywords
+  └─ Produces: overall score + 4 sub-scores + matched/missing keywords
 
-git clone [https://github.com/Arpan-max/resume-analyzer.git](https://github.com/Arpan-max/resume-analyzer.git)
+Step 3 — Suggestion Generator
+  └─ Generates section-wise, actionable improvement tips
+  └─ Outputs: priority actions + per-section recommendations
+```
+
+Each step passes its output as context into the next — classic prompt chaining for consistent, structured JSON output.
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js v18+
+- An Anthropic API key (see below)
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/Arpan-max/resume-analyzer.git
 cd resume-analyzer
+```
 
+### 2. Get your Anthropic API Key
 
-3 — Set up the Backend
+This project uses the **Claude AI API** by Anthropic.
 
-Open your terminal and run:
+1. Go to [console.anthropic.com](https://console.anthropic.com) and create a free account
+2. Navigate to **Settings → API Keys → Create Key**
+3. Copy your key — it starts with `sk-ant-...`
 
+> New accounts receive free credits sufficient for hundreds of resume analyses.
+
+### 3. Configure the backend
+
+```bash
 cd backend
 npm install
+cp .env.example .env
+```
 
+Open `.env` and add your API key:
 
-Create a .env file in the backend folder:
-
-ANTHROPIC_API_KEY=sk-ant-api03-xxxxxxxxxxxxxxxxxxxxxxxx
+```env
+ANTHROPIC_API_KEY=sk-ant-your-key-here
 PORT=5000
 FRONTEND_URL=http://localhost:3000
+```
 
+### 4. Install frontend dependencies
 
-4 — Set up the Frontend
-
-Open a new terminal and run:
-
-cd frontend
+```bash
+cd ../frontend
 npm install
+```
 
+### 5. Run the app
 
-🚀 Run the Project Locally
+Open two terminals:
 
-You need two terminals running simultaneously.
-
-Terminal 1 — Start the Backend:
-
+```bash
+# Terminal 1 — Backend
 cd backend
 npm run dev
 
-
-Terminal 2 — Start the Frontend:
-
+# Terminal 2 — Frontend
 cd frontend
 npm start
+```
 
+App runs at **http://localhost:3000**
 
-Your browser will automatically open at http://localhost:3000. Upload a resume PDF and paste a job description to test it.
+---
 
-📁 Project Structure
+## 📁 Project Structure
 
+```
 resume-analyzer/
 ├── backend/
 │   ├── routes/
-│   │   └── analyze.js          # File upload & analysis endpoint
+│   │   └── analyze.js          # Upload & analysis endpoint
 │   ├── utils/
-│   │   ├── fileParser.js       # PDF/DOCX/TXT text extraction
+│   │   ├── fileParser.js       # PDF / DOCX / TXT text extraction
 │   │   └── aiAnalyzer.js       # 3-step Claude AI prompt chain
-│   ├── server.js               # Express server
-│   ├── .env.example            # Environment variables template
-│   └── package.json
-├── frontend/
-│   ├── public/
-│   │   └── index.html
-│   ├── src/
-│   │   ├── components/
-│   │   │   ├── Header.js             # Navigation header
-│   │   │   ├── UploadSection.js      # Drag-drop upload + JD input
-│   │   │   ├── LoadingScreen.js      # Animated loading with step tracking
-│   │   │   ├── ResultsDashboard.js   # Main results view
-│   │   │   ├── ScoreRing.js          # Animated SVG score ring
-│   │   │   ├── KeywordSection.js     # Matched/missing keywords
-│   │   │   ├── SuggestionsPanel.js   # Section-wise AI suggestions
-│   │   │   └── ResumeInfo.js         # Extracted resume profile
-│   │   ├── App.js
-│   │   └── index.js
-│   └── package.json
-├── .gitignore
-├── package.json                # Root scripts
-└── README.md
+│   ├── server.js
+│   └── .env.example
+└── frontend/
+    └── src/
+        └── components/
+            ├── UploadSection.js     # Drag-drop upload + JD input
+            ├── LoadingScreen.js     # Animated step-by-step loader
+            ├── ResultsDashboard.js  # Main results view + tabs
+            ├── ScoreRing.js         # Animated SVG score ring
+            ├── KeywordSection.js    # Matched / missing keyword tags
+            ├── SuggestionsPanel.js  # Accordion suggestions per section
+            └── ResumeInfo.js        # Extracted resume profile
+```
 
+---
 
-🔧 Troubleshooting
+## 🔑 Environment Variables
 
-"Cannot find module" errors:
-→ Run npm install inside the backend folder, then inside frontend folder.
-
-"Invalid API key" error:
-→ Check your .env file in the backend folder. Make sure there are no spaces around the = sign.
-
-Port 5000 already in use:
-→ Change PORT=5001 in your .env file and restart the backend.
-
-PDF text not extracting:
-→ Some PDFs are image-based (scanned). Try a text-based PDF or DOCX file instead.
-
-Frontend shows blank page:
-→ Make sure backend is running on port 5000 before starting the frontend.
+| Variable | Description |
+|---|---|
+| `ANTHROPIC_API_KEY` | Your Claude API key from [console.anthropic.com](https://console.anthropic.com) |
+| `PORT` | Backend port (default: `5000`) |
+| `FRONTEND_URL` | Frontend origin for CORS (default: `http://localhost:3000`) |
